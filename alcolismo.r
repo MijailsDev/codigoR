@@ -49,25 +49,42 @@ analyze_grades <- function(grades, grade_name) {
   first_midpoint <- hist_data$mids[1]
   last_midpoint <- hist_data$mids[length(hist_data$mids)]
 
-  # Extender los puntos para que el polígono se inicie (first_midpoint - W) y termine (last_midpoint + W)
+  # Extender los puntos para que el polígono se inicie y termine según la amplitud
   poly_midpoints <- c(first_midpoint - W, hist_data$mids, last_midpoint + W)
   poly_counts <- c(0, hist_data$counts, 0)
 
-  # Graficar
+  # Cálculo de la frecuencia acumulada para la ojiva
+  cumulative_freq <- cumsum(as.vector(freq_counts))
+
+  # Crear un vector de colores diferentes para cada barra
+  bar_colors <- rainbow(length(freq_counts))
+
+  # Graficar en el orden solicitado
   par(ps = 7, mex = 0.3, mfrow = c(1, 3))
 
-  # Gráfico 1: Histograma
+  # 1. Histograma
   hist(
     grades_cleaned, breaks = breakpoints,
-    col = "skyblue", border = "black",
+    col = bar_colors, border = "black",
     main = paste("Histograma de Calificación", grade_name),
     xlab = "Intervalos de Calificación",
     ylab = "Número de Estudiantes",
     sub = "Elaboración propia"
   )
 
-  # Gráfico 2: Ojiva
-  cumulative_freq <- cumsum(freq_counts)
+  # 2. Histograma con polígono de frecuencia superpuesto
+  hist(
+    grades_cleaned, breaks = breakpoints,
+    col = bar_colors, border = "black",
+    main = paste("Polígono de Frecuencia de Calificación", grade_name),
+    xlab = "Intervalos de Calificación",
+    ylab = "Número de Estudiantes",
+    sub = "Elaboración propia",
+    xlim = c(poly_midpoints[1], poly_midpoints[length(poly_midpoints)])
+  )
+  lines(poly_midpoints, poly_counts, type = "o", col = "orange", lwd = 2)
+
+  # 3. Ojiva (Frecuencia Acumulada)
   plot(
     hist_data$mids, cumulative_freq,
     type = "o", col = "green",
@@ -76,19 +93,6 @@ analyze_grades <- function(grades, grade_name) {
     ylab = "Número de Estudiantes Acumulados",
     sub = "Elaboración propia"
   )
-
-  # Gráfico 3: Histograma con polígono de frecuencia superpuesto
-  hist(
-    grades_cleaned, breaks = breakpoints,
-    col = "skyblue", border = "black",
-    main = paste("Polígono de Frecuencia de Calificación", grade_name),
-    xlab = "Intervalos de Calificación",
-    ylab = "Número de Estudiantes",
-    sub = "Elaboración propia",
-    xlim = c(poly_midpoints[1], poly_midpoints[length(poly_midpoints)])
-  )
-  # Dibujar el polígono de frecuencias con la amplitud completa al inicio y al final
-  lines(poly_midpoints, poly_counts, type = "o", col = "orange", lwd = 2)
 }
 
 # Realizar el análisis para G1, G2 y G3
