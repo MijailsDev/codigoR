@@ -35,10 +35,6 @@ analyze_grades <- function(grades, grade_name) {
   print(paste("Tabla de frecuencias para", grade_name, ":"))
   print(freq_table_df)
 
-  # Mostrar resumen estadístico
-  print(paste("Resumen estadístico para", grade_name, ":"))
-  print(summary(grades_cleaned))
-
   # Preparar los intervalos para el gráfico
   breakpoints <- bins
   
@@ -56,13 +52,13 @@ analyze_grades <- function(grades, grade_name) {
        main = paste("Ojiva de", grade_name), xlab = "Límites Superiores de Intervalos", ylab = "Frecuencia Acumulada")
 
   # Gráfico 3: Polígono de Frecuencia
-  # Obtener los puntos medios de los intervalos
-  midpoints <- breakpoints[-length(breakpoints)] + W / 2
+# Obtener los puntos medios de los intervalos
+midpoints <- breakpoints[-length(breakpoints)] + W / 2
 
-  # Graficar el polígono de frecuencia
-  plot(midpoints, freq_counts, type = "o", col = "orange", lwd = 2, 
-       main = paste("Polígono de Frecuencia de", grade_name),
-       xlab = "Intervalos de Calificación", ylab = "Frecuencia Absoluta")
+# Graficar el polígono de frecuencia
+plot(midpoints, freq_counts, type = "o", col = "orange", lwd = 2, 
+     main = paste("Polígono de Frecuencia de", grade_name),
+     xlab = "Intervalos de Calificación", ylab = "Frecuencia Absoluta")
 
 }
 
