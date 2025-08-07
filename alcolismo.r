@@ -27,7 +27,7 @@ analizar_calificacion <- function(puntuaciones, nombre_nota) {
   puntuaciones <- na.omit(puntuaciones)
   total_alumnos <- length(puntuaciones)
   
-  num_clases <- round(3.3 * log10(total_alumnos) + 1)
+  num_clases <- round(3.32 * log10(total_alumnos) + 1)
   W <- calcular_amplitud(puntuaciones, num_clases)
   punto_medio_ajuste <- round((W * num_clases - (max(puntuaciones) - min(puntuaciones))) / 2, 4)
   limite_inferior <- min(puntuaciones) - punto_medio_ajuste
