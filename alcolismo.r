@@ -39,7 +39,7 @@ analyze_grades <- function(grades, grade_name, breaks) {
   poly_counts    <- c(0, hist_data$counts, 0)
   cumulative_freq <- cumsum(hist_data$counts)
 
-  # Colores distintos
+  # Paleta de colores vivos y distintos
   bar_colors <- rainbow(length(hist_data$counts))
 
   # Dibujar los 3 gráficos
@@ -66,7 +66,7 @@ analyze_grades <- function(grades, grade_name, breaks) {
 
   # 3) Ojiva (frecuencia acumulada)
   plot(hist_data$mids, cumulative_freq,
-       type = "o", col = "green",
+       type = "o", col = "darkgreen",
        main = paste("Ojiva de", grade_name),
        xlab = "Calificación",
        ylab = "Frecuencia Acumulada")
