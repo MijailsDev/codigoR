@@ -47,13 +47,16 @@ analyze_grades <- function(grades, grade_name) {
 
   # Gráfico 1: Histograma
   hist(grades_cleaned, breaks = breakpoints, col = 'skyblue', border = 'black',
-       main = paste("Histograma de", grade_name),
-       xlab = "Intervalos de Calificación", ylab = "Frecuencia Absoluta")
+       main = paste("Histograma de Calificación", grade_name),
+       xlab = "Intervalos de Calificación", ylab = "Frecuencia Absoluta",
+       sub = "Elaboración propia")
 
   # Gráfico 2: Ojiva
   cumulative_freq <- cumsum(freq_counts)
   plot(breakpoints[-length(breakpoints)] + W / 2, cumulative_freq, type = "o", col = "green",
-       main = paste("Ojiva de", grade_name), xlab = "Límites Superiores de Intervalos", ylab = "Frecuencia Acumulada")
+       main = paste("Ojiva de Calificación", grade_name), 
+       xlab = "Intervalos de Calificación", ylab = "Frecuencia Acumulada",
+       sub = "Elaboración propia")
 
   # Gráfico 3: Polígono de Frecuencia
   # Obtener los puntos medios de los intervalos
@@ -61,8 +64,9 @@ analyze_grades <- function(grades, grade_name) {
 
   # Graficar el polígono de frecuencia
   plot(midpoints, freq_counts, type = "o", col = "orange", lwd = 2, 
-       main = paste("Polígono de Frecuencia de", grade_name),
-       xlab = "Intervalos de Calificación", ylab = "Frecuencia Absoluta")
+       main = paste("Polígono de Frecuencia de Calificación", grade_name),
+       xlab = "Intervalos de Calificación", ylab = "Frecuencia Absoluta",
+       sub = "Elaboración propia")
 
 }
 
